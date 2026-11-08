@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="img/logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="img/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/site.css?v=110815032">
+  <title>لوحة الفريق · باص الخير</title>
+  <meta name="robots" content="noindex">
+</head>
+<body class="admin-page">
+  <header class="top">
+    <div class="wrap top-in" style="width:min(100%,1200px)">
+      <a class="brand" href="./"><img src="img/logo.png" alt=""><b>باص الخير</b><span class="team-pill">الفريق</span></a>
+      <div class="head-nav">
+        <span class="who" id="who"></span>
+        <button class="btn btn-ghost btn-sm" id="signOut" type="button" hidden>خروج</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <p class="muted" id="boot" style="text-align:center;margin-top:64px">جارٍ التحميل…</p>
+
+    <section class="login" id="loginView" hidden>
+      <h2>دخول الفريق</h2>
+      <form class="login-actions" id="loginForm">
+        <div class="field"><label for="username">اسم المستخدم</label><input class="input" id="username" dir="ltr" autocomplete="username" autocapitalize="none" spellcheck="false" required></div>
+        <div class="field"><label for="password">كلمة المرور</label><input class="input" id="password" type="password" dir="ltr" autocomplete="current-password" required></div>
+        <p class="form-error" id="loginErr" role="alert" hidden></p>
+        <button class="btn btn-primary" type="submit" id="loginBtn">دخول</button>
+      </form>
+    </section>
+
+    <div class="admin-shell" id="dashView" hidden>
+      <aside class="side">
+        <button class="btn btn-primary" id="newBtn" type="button">+ مبادرة جديدة</button>
+        <ul class="ini-list" id="iniList"></ul>
+        <button class="btn-link small" id="resetPreview" type="button" hidden>إرجاع البيانات التجريبية</button>
+      </aside>
+      <section class="panel" id="panel"><p class="muted">جارٍ التحميل…</p></section>
+    </div>
+  </main>
+
+  <script>window.KBF_ADMIN = true;</script>
+  <script src="js/config.js?v=110815032"></script>
+  <script src="js/store.js?v=110815032"></script>
+  <script src="js/ui.js?v=110815032"></script>
+  <script src="js/admin.js?v=110815032"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>باص الخير</title>
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="khairbus.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    /* only for people who type khairbus.com in: pick the original or the kids' site */
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 24px max(16px, env(safe-area-inset-right, 0px)) 24px max(16px, env(safe-area-inset-left, 0px)); background: #f3f6f8; color: #15303c; font-family: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif; }
+    main { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; width: min(100%, 560px); }
+    a { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; aspect-ratio: 1; padding: 20px; border: 1px solid #dfe6eb; border-radius: 20px; background: #fff; color: inherit; font-size: 1.05rem; font-weight: 600; text-decoration: none; box-shadow: 0 1px 2px rgba(21, 48, 60, .06), 0 6px 20px rgba(21, 48, 60, .06); transition: border-color .15s, transform .15s; }
+    a:hover { border-color: #3a7aa1; transform: translateY(-2px); }
+    img { width: 72%; height: auto; }
+    @media (max-width: 380px) { main { grid-template-columns: 1fr; } a { aspect-ratio: auto; } img { width: 120px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <a href="home/"><img src="khairbus.png" alt="">باص الخير</a>
+    <a href="https://friends.khairbus.com/"><img src="friends.png" alt="">أصدقاء باص الخير</a>
+  </main>
+</body>
+</html>

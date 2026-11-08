@@ -137,14 +137,17 @@
 
   $('#extraForm').addEventListener('submit', e => {
     e.preventDefault();
-    const name = $('#exName').value.trim();
+    const name = $('#exItem').value.trim();
+    // phones sometimes drop the person's own name in here; a name is never an item
+    const me = $('#name').value.trim();
+    if (me && name.toLowerCase() === me.toLowerCase()) { $('#exItem').value = ''; return; }
     const qty = Math.max(1, parseInt($('#exQty').value, 10) || 1);
-    if (!name) return $('#exName').focus();
+    if (!name) return $('#exItem').focus();
     const listed = (ini.items || []).find(it => sameName(it.name) === sameName(name));
     if (listed) { toast(`${listed.name} موجود في القائمة`); return; }
     const same = extras.find(x => sameName(x.name) === sameName(name));
     if (same) same.qty += qty; else extras.push({ name, qty });
-    $('#exName').value = '';
+    $('#exItem').value = '';
     $('#exQty').value = 1;
     renderExtras();
     renderBar();

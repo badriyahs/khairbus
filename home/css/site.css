@@ -108,26 +108,29 @@ h1, h2, h3 { margin: 0; line-height: 1.3; text-wrap: balance; }
 .box-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 16px; margin: 0; padding: 0; list-style: none; color: var(--ink-soft); font-size: .93rem; }
 .box-list li::before { content: "• "; color: var(--green); }
 
-/* the items: a tidy list, tap a row or use − / + */
-.items { margin: 0; padding: 0; list-style: none; border: 1px solid var(--line); border-radius: 16px; background: var(--paper); box-shadow: var(--shadow); overflow: hidden; }
-.item { display: flex; align-items: center; gap: 12px; padding: 10px 14px; transition: background .15s; }
-.item + .item { border-top: 1px solid var(--line); }
-.item.picked { background: var(--green-soft); }
+/* the items: product cards, tap a card or use − / + */
+.items { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; }
+@media (min-width: 620px) { .items { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.item { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 16px; background: var(--paper); box-shadow: var(--shadow); overflow: hidden; transition: border-color .15s, box-shadow .15s; }
+.item.picked { border-color: var(--green); box-shadow: 0 0 0 2px var(--green-soft), var(--shadow); }
 .item.full { opacity: .55; }
-.item-pic { flex: none; width: 52px; height: 52px; object-fit: contain; border-radius: 10px; background: #fff; }
-.item-main { display: flex; flex: 1; flex-direction: column; min-width: 0; padding: 0; border: 0; background: none; color: inherit; font: inherit; text-align: start; cursor: pointer; }
+.item-main { display: flex; flex: 1; flex-direction: column; align-items: center; gap: 1px; width: 100%; padding: 14px 12px 8px; border: 0; background: none; color: inherit; font: inherit; text-align: center; cursor: pointer; }
 .item-main:disabled { cursor: default; }
-.item-name { font-weight: 600; }
+.item-pic { display: block; width: 100%; height: 128px; margin: -4px 0 8px; object-fit: contain; }
+.item-name { font-weight: 700; line-height: 1.35; }
 .item-sub { color: var(--muted); font-size: .85rem; }
+.item-bar { width: 100%; height: 5px; margin: 10px 0 4px; }
 .item-left { color: var(--ink-soft); font-size: .85rem; font-weight: 600; white-space: nowrap; }
 .item-left b { color: var(--ink); }
 .item-left.ok { color: var(--green-dark); }
 .item-left .ic { vertical-align: -2px; }
-.stepper { flex: none; display: flex; align-items: center; gap: 4px; }
-.step { display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); color: var(--ink-soft); cursor: pointer; }
+.stepper { display: flex; align-items: center; justify-content: space-between; gap: 6px; padding: 0 12px 12px; }
+.stepper.one .step { width: 100%; }
+.step { display: grid; place-items: center; width: 40px; height: 38px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); color: var(--ink-soft); cursor: pointer; transition: border-color .15s, color .15s, background .15s; }
 .step:hover:not(:disabled) { border-color: var(--green); color: var(--green-dark); }
 .step:disabled { opacity: .35; cursor: default; }
-.qty { width: 34px; color: var(--green-dark); font-weight: 700; text-align: center; }
+.picked .step[data-act="plus"] { border-color: var(--green); background: var(--green); color: #fff; }
+.qty { flex: 1; color: var(--green-dark); font-size: 1.1rem; font-weight: 700; text-align: center; }
 
 /* something extra */
 .extra-form { display: grid; grid-template-columns: minmax(0, 1fr) 76px auto; gap: 8px; }
@@ -256,8 +259,8 @@ main { padding-bottom: 48px; }
 }
 @media (max-width: 460px) {
   .extra-form { grid-template-columns: minmax(0, 1fr) 64px auto; }
-  .item { padding: 10px 12px; gap: 10px; }
-  .item-pic { width: 44px; height: 44px; }
+  .items { gap: 10px; }
+  .item-pic { height: 112px; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }

@@ -101,16 +101,21 @@
     setHTML($('#items'), items.map(it => {
       const left = remaining(it), full = left === 0, n = Math.min(pick[it.id] || 0, left);
       const sub = boxy() ? `${amount(it)} بكل صندوق` : (it.unit || '');
+      const need = +it.needed || 0, pct = need ? Math.round(Math.min(got[it.id] || 0, need) / need * 100) : 0;
       const status = full ? `<span class="item-left ok">${icon('check', 14)} اكتمل</span>` : `<span class="item-left">باقي <b>${left}</b></span>`;
-      // just + until you pick some, then − n +
-      const step = isOpen() && !full ? `<span class="stepper">${n ? `
+      // a wide + until you pick some, then − n +
+      const step = isOpen() && !full ? `<span class="stepper${n ? '' : ' one'}">${n ? `
           <button type="button" class="step" data-act="minus" aria-label="إنقاص ${esc(it.name)}">${icon('minus', 16)}</button>
           <span class="qty">${n}</span>` : ''}
           <button type="button" class="step" data-act="plus" aria-label="زيادة ${esc(it.name)}"${n >= left ? ' disabled' : ''}>${icon('plus', 16)}</button>
         </span>` : '';
       return `<li class="item${n ? ' picked' : ''}${full ? ' full' : ''}" data-id="${esc(it.id)}">
-        <img class="item-pic" src="${esc(it.img || 'img/logo.png')}" alt="">
-        <button type="button" class="item-main" data-act="plus"${isOpen() && !full ? '' : ' disabled'}><span class="item-name">${esc(it.name)}</span>${sub ? `<span class="item-sub">${esc(sub)}</span>` : ''}${status}</button>
+        <button type="button" class="item-main" data-act="plus"${isOpen() && !full ? '' : ' disabled'}>
+          <img class="item-pic" src="${esc(it.img || 'img/logo.png')}" alt="">
+          <span class="item-name">${esc(it.name)}</span>${sub ? `<span class="item-sub">${esc(sub)}</span>` : ''}
+          <span class="bar item-bar"><span class="bar-fill" style="width:${pct}%"></span></span>
+          ${status}
+        </button>
         ${step}
       </li>`;
     }).join(''));

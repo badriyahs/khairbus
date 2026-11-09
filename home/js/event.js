@@ -26,12 +26,14 @@
   const perBox = it => Math.max(1, Math.round((+it.needed || 0) / (+ini.boxes || 1)));
   const ONE = { 'أكياس': 'كيس', 'علب': 'علبة', 'غراش': 'غرشة', 'حبات': 'حبة' };
   const TWO = { 'أكياس': 'كيسين', 'علب': 'علبتين', 'غراش': 'غرشتين', 'حبات': 'حبتين' };
-  function amount(it) {
-    const n = perBox(it), unit = String(it.unit || '').trim();
+  // a number with its unit: "130 كيس", "5 أكياس", "كيسين", "12 باكيت"
+  function count(n, unit) {
+    unit = String(unit || '').trim();
     if (!ONE[unit]) return `${n} ${unit}`.trim();
     if (n === 2) return TWO[unit];
     return `${n} ${n >= 3 && n <= 10 ? unit : ONE[unit]}`;
   }
+  const amount = it => count(perBox(it), it.unit);
   const boxy = () => +ini.boxes > 0;
 
   function render() {
@@ -102,7 +104,7 @@
       const left = remaining(it), full = left === 0, n = Math.min(pick[it.id] || 0, left);
       const sub = boxy() ? `${amount(it)} بكل صندوق` : (it.unit || '');
       const need = +it.needed || 0, pct = need ? Math.round(Math.min(got[it.id] || 0, need) / need * 100) : 0;
-      const status = full ? `<span class="item-left ok">${icon('check', 14)} اكتمل</span>` : `<span class="item-left">باقي <b>${left}</b></span>`;
+      const status = full ? `<span class="item-left ok">${icon('check', 14)} اكتمل</span>` : `<span class="item-left">باقي <b>${esc(count(left, it.unit))}</b></span>`;
       // a wide + until you pick some, then − n +
       const step = isOpen() && !full ? `<span class="stepper${n ? '' : ' one'}">${n ? `
           <button type="button" class="step" data-act="minus" aria-label="إنقاص ${esc(it.name)}">${icon('minus', 16)}</button>
